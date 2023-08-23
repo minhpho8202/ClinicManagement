@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="baseLayout"
+                template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name = "content" value="/WEB-INF/pages/index.jsp"/>
+    </definition>
+    <definition name="user" extends="baseLayout">
+        <put-attribute name="title" value="User" />
+        <put-attribute name = "content" value="/WEB-INF/pages/user.jsp"/>
+    </definition>
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Login" />
+        <put-attribute name = "content" value="/WEB-INF/pages/login.jsp"/>
+    </definition>
+    <definition name="medicines" extends="baseLayout">
+        <put-attribute name="title" value="Medicine" />
+        <put-attribute name = "content" value="/WEB-INF/pages/medicines.jsp"/>
+    </definition>
+    <definition name="addMedicine" extends="baseLayout">
+        <put-attribute name="title" value="Add medicine" />
+        <put-attribute name = "content" value="/WEB-INF/pages/addMedicine.jsp"/>
+    </definition>
+    <definition name="shifts" extends="baseLayout">
+        <put-attribute name="title" value="Shift" />
+        <put-attribute name = "content" value="/WEB-INF/pages/shifts.jsp"/>
+    </definition>
+    <definition name="rules" extends="baseLayout">
+        <put-attribute name="title" value="Rule" />
+        <put-attribute name = "content" value="/WEB-INF/pages/rules.jsp"/>
+    </definition>
+    <definition name="updateRule" extends="baseLayout">
+        <put-attribute name="title" value="Update rule" />
+        <put-attribute name = "content" value="/WEB-INF/pages/updateRule.jsp"/>
+    </definition>
+    <definition name="addShift" extends="baseLayout">
+        <put-attribute name="title" value="Add shift" />
+        <put-attribute name = "content" value="/WEB-INF/pages/addShift.jsp"/>
+    </definition>
+    <definition name="addEmployee" extends="baseLayout">
+        <put-attribute name="title" value="Add employee" />
+        <put-attribute name = "content" value="/WEB-INF/pages/addEmployee.jsp"/>
+    </definition>
+</tiles-definitions>
+

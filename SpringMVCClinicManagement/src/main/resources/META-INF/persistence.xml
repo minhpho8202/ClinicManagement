@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <!-- Define Persistence Unit -->
+  <persistence-unit name="my_persistence_unit">
+    <class>com.dmp.pojo.Rule</class>
+    <class>com.dmp.pojo.Shiftassignment</class>
+    <class>com.dmp.pojo.Payment</class>
+    <class>com.dmp.pojo.PaymentMethod</class>
+    <class>com.dmp.pojo.Appointment</class>
+    <class>com.dmp.pojo.Medicine</class>
+    <class>com.dmp.pojo.Unit</class>
+    <class>com.dmp.pojo.Shift</class>
+    <class>com.dmp.pojo.PrescriptionMedicine</class>
+    <class>com.dmp.pojo.Prescription</class>
+    <class>com.dmp.pojo.User</class>
+    <class>com.dmp.pojo.Role</class>
+    <class>com.dmp.pojo.UserShift</class>
+  </persistence-unit>
+</persistence>
