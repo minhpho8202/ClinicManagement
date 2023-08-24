@@ -43,10 +43,12 @@ public class UserUsernameValidator implements Validator{
                 }
             }
         }
-        if(!users.isEmpty() && users != null) {
+        if(users != null && !users.isEmpty()) {
             for(User user: users) {
                 if(user.getUsername().equals(u.getUsername()))
                     errors.rejectValue("username", "user.username.duplicateErr");
+                if(user.getEmail().equals(u.getEmail()))
+                    errors.rejectValue("email", "user.email.duplicateErr");
             }
         }
     }

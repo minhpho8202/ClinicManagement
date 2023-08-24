@@ -12,10 +12,12 @@ import com.dmp.service.UserService;
 import com.dmp.service.UserShiftService;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,7 +47,7 @@ public class ShiftController {
         if (shifts != null && !shifts.isEmpty()) {
             model.addAttribute("shift", shifts);
         }
-        if(userShift != null && !userShift.isEmpty()) {
+        if (userShift != null && !userShift.isEmpty()) {
             model.addAttribute("userShift", userShift);
         }
         return "shifts";
@@ -58,9 +60,11 @@ public class ShiftController {
     }
 
     @PostMapping("/shifts")
-    public String add(@ModelAttribute(value = "shift") Shift s) {
-        if (this.shiftService.addOrUpdate(s) == true) {
-            return "redirect:/shifts";
+    public String add(@ModelAttribute(value = "shift") @Valid Shift s, BindingResult rs) {
+        if (!rs.hasErrors()) {
+            if (this.shiftService.addOrUpdate(s) == true) {
+                return "redirect:/shifts";
+            }
         }
         return "addShift";
     }
@@ -93,7 +97,7 @@ public class ShiftController {
         if (users != null && !users.isEmpty()) {
             model.addAttribute("user", users);
         }
-        if(userShiftList != null && !userShiftList.isEmpty()) {
+        if (userShiftList != null && !userShiftList.isEmpty()) {
             model.addAttribute("userShiftList", userShiftList);
         }
 

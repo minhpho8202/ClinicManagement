@@ -19,7 +19,7 @@
 <c:url value="/shifts" var="action"/>
 <form:form method="post" action="${action}" modelAttribute="shift" >
     <form:hidden path="id" />
-    <form:errors path="*" element="div" cssClass="alert alert-danger mt-1" />
+    <%--<form:errors path="*" element="div" cssClass="alert alert-danger mt-1" />--%>
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="name" id="name" placeholder="..." />
         <label for="name"><spring:message code="content.shift.name"/></label>
@@ -28,10 +28,12 @@
     <div class="form-floating mb-3 mt-3">
         <form:input type="datetime-local" class="form-control" path="startTime" id="startTime" placeholder="..." />
         <label for="startTime"><spring:message code="content.shift.start_time"/></label>
+        <form:errors path="startTime" element="div" cssClass="alert alert-danger mt-1" />
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="datetime-local" class="form-control" path="endTime" id="endTime" placeholder="..." />
         <label for="endTime"><spring:message code="content.shift.end_time"/></label>
+        <form:errors path="endTime" element="div" cssClass="alert alert-danger mt-1" />
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="description" id="description" placeholder="..." />

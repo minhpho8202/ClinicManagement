@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/rules"/>"><spring:message code="header.rule" /></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/statics"/>"><spring:message code="header.statics" /></a>
+                </li>
 
 
             </ul>
@@ -36,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                             <li><a class="dropdown-item" href="?lang=en">English</a></li>
-                            <li><a class="dropdown-item" href="?lang=vi">Tiếng Việt</a></li>
+                            <li><a class="dropdown-item" href="?lang=vi">Vietnamese</a></li>
                         </ul>
                     </li>
                 </ul>

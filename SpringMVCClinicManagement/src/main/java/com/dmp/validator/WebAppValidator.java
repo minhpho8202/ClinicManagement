@@ -4,6 +4,7 @@
  */
 package com.dmp.validator;
 
+import com.dmp.pojo.Medicine;
 import com.dmp.pojo.User;
 import java.util.Set;
 import javax.validation.ConstraintViolation;

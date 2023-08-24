@@ -10,14 +10,18 @@ import com.dmp.fomatters.RoleFormatter;
 import com.dmp.fomatters.ShiftFormatter;
 import com.dmp.fomatters.UnitFormatter;
 import com.dmp.fomatters.UserFormatter;
+import com.dmp.service.MedicineService;
 import com.dmp.service.UserService;
 import com.dmp.validator.ConfirmPasswordValidator;
+import com.dmp.validator.MedicineNameValidator;
 import com.dmp.validator.UserUsernameValidator;
 import com.dmp.validator.WebAppValidator;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +30,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -59,6 +65,8 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     private Environment env;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MedicineService medicineService;
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -100,7 +108,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages"); // Tên của file properties
+        messageSource.setBasename("messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
@@ -129,6 +137,25 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
+    
+//    @Bean(name = "getMailSender")
+//    public JavaMailSender getMailSender() {
+//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//        
+//        mailSender.setHost("smtp.gmail.com");
+//        mailSender.setPort(587);
+//        mailSender.setUsername("minhpho8202@gmail.com");
+//        mailSender.setPassword("796120654669pho");
+//        
+//        Properties javaMailProperties = new Properties();
+//        javaMailProperties.put("mail.smtp.starttls.enable", "true");
+//        javaMailProperties.put("mail.smtp.auth", "true");
+//        javaMailProperties.put("mail.transport.protocol", "smtp");
+//        javaMailProperties.put("mail.debug", "true");
+//        
+//        mailSender.setJavaMailProperties(javaMailProperties);
+//        return mailSender;
+//    }
 
     @Override
     public Validator getValidator() {

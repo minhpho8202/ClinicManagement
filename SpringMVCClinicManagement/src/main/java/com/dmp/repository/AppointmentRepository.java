@@ -7,6 +7,7 @@ package com.dmp.repository;
 import com.dmp.pojo.Appointment;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,4 +20,6 @@ public interface AppointmentRepository {
     boolean deleteAppointmentById(int id);
     Appointment getAppointmentById(int id);
     long countAppointmentsByDate(Date date);
+    Long countAppointments(Map<String, Date> params);
+//    public List<Appointment> getAppointments(Map<String, Date> params);
 }

@@ -50,23 +50,23 @@ public class Shift implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @NotNull(message = "{shift.name.nullErr}")
+    @Size(min = 1, max = 100, message = "{shift.name.lengErr}")
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{shift.startTime.nullErr}")
     @Column(name = "start_time")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{shift.endTime.nullErr}")
     @Column(name = "end_time")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
-    @Size(max = 255)
+    @Size(max = 255, message = "{shift.description.lengErr}")
     @Column(name = "description")
     private String description;
     @JsonIgnore

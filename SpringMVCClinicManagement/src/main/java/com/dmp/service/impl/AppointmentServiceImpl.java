@@ -7,7 +7,9 @@ package com.dmp.service.impl;
 import com.dmp.pojo.Appointment;
 import com.dmp.repository.AppointmentRepository;
 import com.dmp.service.AppointmentService;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,16 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Override
     public Appointment getAppointmentById(int id) {
         return this.appointmentRepository.getAppointmentById(id);
+    }
+
+//    @Override
+//    public List<Appointment> getAppointments(Map<String, Date> params) {
+//        return this.appointmentRepository.getAppointments(params);
+//    }
+
+    @Override
+    public Long countAppointments(Map<String, Date> params) {
+        return this.appointmentRepository.countAppointments(params);
     }
     
 }

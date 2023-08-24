@@ -7,8 +7,10 @@ package com.dmp.repository.impl;
 import com.dmp.pojo.Appointment;
 import com.dmp.repository.AppointmentRepository;
 import com.dmp.repository.RuleRepository;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -43,11 +45,11 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         Session session = this.factory.getObject().getCurrentSession();
         try {
             long count = this.countAppointmentsByDate(appointment.getCreatedDate());
-            
-            if(count >= this.ruleRepository.getRule().getAppointmentLimit()) {
+
+            if (count >= this.ruleRepository.getRule().getAppointmentLimit()) {
                 return false;
             }
-            
+
             if (appointment.getId() == null) {
                 session.save(appointment);
             } else {
@@ -136,6 +138,73 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         Query q = session.createQuery(query);
 
         return Long.parseLong(q.getSingleResult().toString());
+    }
+
+//    @Override
+//    public List<Appointment> getAppointments(Map<String, Date> params) {
+//        Session session = this.factory.getObject().getCurrentSession();
+//        CriteriaBuilder b = session.getCriteriaBuilder();
+//        CriteriaQuery<Appointment> q = b.createQuery(Appointment.class);
+//        Root<Appointment> root = q.from(Appointment.class);
+//        
+//        q.select(root);
+//        
+//        if(params != null) {
+//            List<Predicate> predicates = new ArrayList<>();
+//            
+////            Predicate p1 = null;
+////            Predicate p2 = null;
+//            
+//            Date fromDate = params.get("fromDate");
+//            if(fromDate != null) {
+//                predicates.add(b.greaterThanOrEqualTo(root.get("createdDate"), fromDate));
+////                p1 = b.greaterThanOrEqualTo(root.get("createdDate"), fromDate);
+//            }
+//            Date toDate = params.get("toDate");
+//            if(toDate != null) {
+//                predicates.add(b.lessThanOrEqualTo(root.get("createdDate"), toDate));
+////                p2 = b.lessThanOrEqualTo(root.get("createdDate"), toDate);
+//            }
+//            
+//            q.where(predicates.toArray(new Predicate[0]));
+//
+//        }
+//        
+//        Query query = session.createQuery(q);
+//        
+//        return query.getResultList();
+//    }
+    @Override
+    public Long countAppointments(Map<String, Date> params) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Long> q = b.createQuery(Long.class); // Sử dụng Long.class cho kết quả là số lượng
+
+        Root<Appointment> root = q.from(Appointment.class);
+
+        q.select(b.count(root)); // Chọn trường đếm
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+
+            Date fromDate = params.get("fromDate");
+            if (fromDate != null) {
+                predicates.add(b.greaterThanOrEqualTo(root.get("createdDate"), fromDate));
+            }
+            Date toDate = params.get("toDate");
+            if (toDate != null) {
+                predicates.add(b.lessThanOrEqualTo(root.get("createdDate"), toDate));
+            }
+
+            q.where(predicates.toArray(new Predicate[0]));
+        }
+
+        Query<Long> query = session.createQuery(q);
+
+        // Sử dụng uniqueResult() để lấy kết quả là số lượng đếm
+        Long count = query.uniqueResult();
+
+        return count;
     }
 
 }

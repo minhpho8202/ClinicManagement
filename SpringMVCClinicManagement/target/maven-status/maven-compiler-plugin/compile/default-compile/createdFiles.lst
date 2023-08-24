@@ -47,6 +47,7 @@ com\dmp\service\MedicineService.class
 com\dmp\service\PaymentService.class
 com\dmp\configs\TilesConfigs.class
 com\dmp\controllers\ApiRuleController.class
+com\dmp\validator\MedicineNameValidator.class
 com\dmp\configs\SecurityWebApplicationInitializer.class
 com\dmp\repository\impl\PrescriptionRepositoryImpl.class
 com\dmp\service\PaymentMethodService.class
@@ -65,6 +66,7 @@ com\dmp\repository\PaymentMethodRepository.class
 com\dmp\repository\impl\UserRepositoryImpl.class
 com\dmp\configs\HibernateConfig.class
 com\dmp\pojo\Payment.class
+com\dmp\controllers\StaticsController.class
 com\dmp\pojo\Prescription.class
 com\dmp\service\impl\MedicineServiceImpl.class
 com\dmp\pojo\Medicine.class

@@ -8,6 +8,7 @@ import com.dmp.pojo.Medicine;
 import com.dmp.pojo.Unit;
 import com.dmp.service.MedicineService;
 import com.dmp.service.UnitService;
+import com.dmp.validator.MedicineNameValidator;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -17,8 +18,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +41,13 @@ public class MedicineController {
     private UnitService unitService;
     @Autowired
     private Environment env;
+    @Autowired
+    private MedicineNameValidator medicineNameValidator;
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(medicineNameValidator);
+    }
 
     @ModelAttribute
     public void commonAttr(Model model) {
