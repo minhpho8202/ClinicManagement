@@ -8,6 +8,9 @@ import com.dmp.pojo.Payment;
 import com.dmp.pojo.PaymentDTO;
 import com.dmp.repository.PaymentRepository;
 import com.dmp.service.PaymentService;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,11 @@ public class PaymentServiceImpl implements PaymentService{
     @Override
     public boolean addOrUpdate(PaymentDTO paymentDTO) {
         return this.paymentRepository.addOrUpdate(paymentDTO);
+    }
+
+    @Override
+    public List<Payment> getPayments(Map<String, Date> params) {
+        return this.paymentRepository.getPayments(params);
     }
     
 }

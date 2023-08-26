@@ -21,5 +21,5 @@ public interface AppointmentRepository {
     Appointment getAppointmentById(int id);
     long countAppointmentsByDate(Date date);
     Long countAppointments(Map<String, Date> params);
-//    public List<Appointment> getAppointments(Map<String, Date> params);
+    public List<Appointment> getAppointments(Map<String, Date> params);
 }

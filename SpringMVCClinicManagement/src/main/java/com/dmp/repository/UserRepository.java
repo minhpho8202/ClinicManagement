@@ -20,4 +20,7 @@ public interface UserRepository {
     User getUserByUsername(String username);
     boolean deleteUserById(int id);
     boolean authUser(String username, String password);
+    User addUser(User user);
+    public boolean isUsernameUnique(String username);
+    public boolean isEmailUnique(String email);
 }

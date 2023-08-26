@@ -105,6 +105,17 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return v;
     }
     
+//    @Bean
+//    public WebAppValidator medicineValidator() {
+//        Set<Validator> springValidators = new HashSet<>();
+//        springValidators.add(new MedicineNameValidator(medicineService));
+//        
+//        WebAppValidator v = new WebAppValidator();
+//        v.setSpringValidators(springValidators);
+//        
+//        return v;
+//    }
+    
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

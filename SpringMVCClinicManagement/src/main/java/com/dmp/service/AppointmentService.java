@@ -20,5 +20,5 @@ public interface AppointmentService {
     boolean deleteAppointmentById(int id);
     Appointment getAppointmentById(int id);
     Long countAppointments(Map<String, Date> params);
-//    public List<Appointment> getAppointments(Map<String, Date> params);
+    public List<Appointment> getAppointments(Map<String, Date> params);
 }

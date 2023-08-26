@@ -11,6 +11,7 @@ C:\SpringMVCClinicManagement\src\main\java\com\dmp\pojo\Shift.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\service\PrescriptionService.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\repository\impl\RuleRepositoryImpl.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\repository\impl\UserShiftRepositoryImpl.java
+C:\SpringMVCClinicManagement\src\main\java\com\dmp\controllers\StaticsController.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\repository\RuleRepository.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\validator\WebAppValidator.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\repository\impl\PaymentRepositoryImpl.java

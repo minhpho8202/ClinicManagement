@@ -8,7 +8,9 @@ import com.dmp.pojo.PrescriptionMedicine;
 import com.dmp.pojo.PrescriptionMedicineDTO;
 import com.dmp.repository.PrescriptionMedicineRepository;
 import com.dmp.service.PrescriptionMedicineService;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class PrescriptionMedicineServiceImpl implements PrescriptionMedicineServ
     @Override
     public List<PrescriptionMedicine> getPrescriptionMedicineByPrescriptionId(int id) {
         return this.prescriptionMedicineRepository.getPrescriptionMedicineByPrescriptionId(id);
+    }
+
+    @Override
+    public List<PrescriptionMedicine> getPrescriptions(Map<String, Date> params) {
+        return this.prescriptionMedicineRepository.getPrescriptions(params);
     }
     
 }

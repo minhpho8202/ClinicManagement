@@ -6,6 +6,9 @@ package com.dmp.service;
 
 import com.dmp.pojo.Payment;
 import com.dmp.pojo.PaymentDTO;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,4 +16,5 @@ import com.dmp.pojo.PaymentDTO;
  */
 public interface PaymentService {
     boolean addOrUpdate(PaymentDTO paymentDTO);
+    List<Payment> getPayments(Map<String, Date> params);
 }

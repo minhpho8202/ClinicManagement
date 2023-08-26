@@ -24,7 +24,11 @@ const Header = () => {
                         <Link className="nav-link" to="/create-appointment">Book appoiment here</Link>
                         <div className="d-flex align-items-center">
                             {
-                                user === null ? <Link className="nav-link" to="/login">Login</Link> :
+                                user === null ? 
+                                <>
+                                <Link className="nav-link" to="/register">Register</Link>
+                                <Link className="nav-link" to="/login">Login</Link>
+                                </> :
                                     <>
                                         <Link className="nav-link" to="/appointments">Appointment</Link>
                                         {user.roleId.name !== "ROLE_PATIENT" &&

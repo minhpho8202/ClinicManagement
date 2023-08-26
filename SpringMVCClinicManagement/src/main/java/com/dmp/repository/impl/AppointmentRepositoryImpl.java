@@ -140,40 +140,40 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         return Long.parseLong(q.getSingleResult().toString());
     }
 
-//    @Override
-//    public List<Appointment> getAppointments(Map<String, Date> params) {
-//        Session session = this.factory.getObject().getCurrentSession();
-//        CriteriaBuilder b = session.getCriteriaBuilder();
-//        CriteriaQuery<Appointment> q = b.createQuery(Appointment.class);
-//        Root<Appointment> root = q.from(Appointment.class);
-//        
-//        q.select(root);
-//        
-//        if(params != null) {
-//            List<Predicate> predicates = new ArrayList<>();
-//            
-////            Predicate p1 = null;
-////            Predicate p2 = null;
-//            
-//            Date fromDate = params.get("fromDate");
-//            if(fromDate != null) {
-//                predicates.add(b.greaterThanOrEqualTo(root.get("createdDate"), fromDate));
-////                p1 = b.greaterThanOrEqualTo(root.get("createdDate"), fromDate);
-//            }
-//            Date toDate = params.get("toDate");
-//            if(toDate != null) {
-//                predicates.add(b.lessThanOrEqualTo(root.get("createdDate"), toDate));
-////                p2 = b.lessThanOrEqualTo(root.get("createdDate"), toDate);
-//            }
-//            
-//            q.where(predicates.toArray(new Predicate[0]));
-//
-//        }
-//        
-//        Query query = session.createQuery(q);
-//        
-//        return query.getResultList();
-//    }
+    @Override
+    public List<Appointment> getAppointments(Map<String, Date> params) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Appointment> q = b.createQuery(Appointment.class);
+        Root<Appointment> root = q.from(Appointment.class);
+        
+        q.select(root);
+        
+        if(params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            
+//            Predicate p1 = null;
+//            Predicate p2 = null;
+            
+            Date fromDate = params.get("fromDate");
+            if(fromDate != null) {
+                predicates.add(b.greaterThanOrEqualTo(root.get("createdDate"), fromDate));
+//                p1 = b.greaterThanOrEqualTo(root.get("createdDate"), fromDate);
+            }
+            Date toDate = params.get("toDate");
+            if(toDate != null) {
+                predicates.add(b.lessThanOrEqualTo(root.get("createdDate"), toDate));
+//                p2 = b.lessThanOrEqualTo(root.get("createdDate"), toDate);
+            }
+            
+            q.where(predicates.toArray(new Predicate[0]));
+
+        }
+        
+        Query query = session.createQuery(q);
+        
+        return query.getResultList();
+    }
     @Override
     public Long countAppointments(Map<String, Date> params) {
         Session session = this.factory.getObject().getCurrentSession();

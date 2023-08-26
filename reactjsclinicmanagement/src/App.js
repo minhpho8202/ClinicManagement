@@ -12,6 +12,7 @@ import cookie from "react-cookies";
 import MedicalExamination from "./components/MedicalExamination";
 import Payment from "./components/Payment";
 import Shift from "./components/Shift";
+import Register from "./components/Register";
 
 export const MyUserContext = createContext();
 
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/medical-examination/:appointmentId" element={<MedicalExamination />} />
           <Route path="/payment/:appointmentId" element={<Payment />} />
           <Route path="/shift" element={<Shift/>} />
+          <Route path="/register" element={<Register/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

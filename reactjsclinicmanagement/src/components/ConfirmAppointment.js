@@ -75,6 +75,7 @@ const ConfirmAppointment = () => {
             alert("falied");
         }
     }
+    
     const handleGo = (a) => {
         return nav(`/medical-examination/?appointmentId=${a.id}`);
     }

@@ -31,6 +31,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -41,6 +42,8 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
     @Autowired
     private Cloudinary cloudinary;
     @Autowired
@@ -63,6 +66,10 @@ public class UserServiceImp implements UserService {
         user.setCreatedDate(timestamp);
         String password = user.getPassword();
         user.setPassword(this.passwordEncoder.encode(password));
+        
+        if(user.getRoleId() == null) {
+            user.setRoleId(this.roleRepository.getRoleByName("ROLE_PATIENT"));
+        }
 
         if (!user.getFile().isEmpty()) {
             try {
@@ -116,6 +123,54 @@ public class UserServiceImp implements UserService {
     @Override
     public boolean authUser(String username, String password) {
         return this.userRepository.authUser(username, password);
+    }
+
+    @Override
+    public User addUser(Map<String, String> params, MultipartFile avatar) {
+        User u = new User();
+        LocalDateTime now = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateOfBirth = null;
+        try {
+            dateOfBirth = dateFormat.parse(params.get("dateOfBirth"));
+        } catch (ParseException ex) {
+            Logger.getLogger(UserServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        u.setFirstName(params.get("firstName"));
+        u.setLastName(params.get("lastName"));
+        u.setDateOfBirth(dateOfBirth);
+        u.setGender(params.get("gender"));
+        u.setEmail(params.get("email"));
+        u.setPhoneNumber(params.get("phoneNumber"));
+        u.setAddress(params.get("address"));
+        u.setUsername(params.get("username"));
+        u.setPassword(this.passwordEncoder.encode(params.get("password")));
+        u.setConfirmPassword(this.passwordEncoder.encode(params.get("confirmPassword")));
+        u.setCreatedDate(timestamp);
+        u.setRoleId(this.roleRepository.getRoleByName("ROLE_PATIENT"));
+        if (!avatar.isEmpty()) {
+            try {
+                Map res = this.cloudinary.uploader().upload(avatar.getBytes(), 
+                        ObjectUtils.asMap("resource_type", "auto"));
+                u.setAvatar(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(UserServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        this.userRepository.addUser(u);
+        return u;
+    }
+
+    @Override
+    public boolean isUsernameUnique(String username) {
+        return this.userRepository.isUsernameUnique(username);
+    }
+
+    @Override
+    public boolean isEmailUnique(String email) {
+        return this.userRepository.isEmailUnique(email);
     }
 
 }

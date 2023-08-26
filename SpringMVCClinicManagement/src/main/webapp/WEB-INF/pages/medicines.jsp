@@ -13,9 +13,9 @@
 <a href="<c:url value="/medicines/add" />" class="btn btn-primary"><spring:message code="content.medicine.title.add_medicine" /></a>
 <c:if test="${counter > 1}">
     <ul class="pagination mt-1 justify-content-center">
-        <li class="page-item"><a class="page-link" href="<c:url value="/" />">Tất cả</a></li>
+        <li class="page-item"><a class="page-link" href="<c:url value="/medicines" />">Tất cả</a></li>
             <c:forEach begin="1" end="${counter}" var="i">
-                <c:url value="/" var="pageUrl">
+                <c:url value="/medicines" var="pageUrl">
                     <c:param name="page" value="${i}"></c:param>
                 </c:url>
             <li class="page-item"><a class="page-link" href="${pageUrl}">${i}</a></li>

@@ -15,6 +15,9 @@ export const endpoints = {
     "rules": `${SERVER_CONTEXT}/api/rules/`,
     "payments": `${SERVER_CONTEXT}/api/payments/`,
     "shifts": `${SERVER_CONTEXT}/api/shifts/`,
+    "register": `${SERVER_CONTEXT}/api/users/`,
+    "check-username": `${SERVER_CONTEXT}/api/check-username/`,
+    "check-email": `${SERVER_CONTEXT}/api/check-email/`
 }
 
 export const authApi = () => {

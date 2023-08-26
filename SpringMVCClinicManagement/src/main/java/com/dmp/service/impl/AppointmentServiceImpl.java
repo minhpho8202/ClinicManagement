@@ -47,10 +47,10 @@ public class AppointmentServiceImpl implements AppointmentService{
         return this.appointmentRepository.getAppointmentById(id);
     }
 
-//    @Override
-//    public List<Appointment> getAppointments(Map<String, Date> params) {
-//        return this.appointmentRepository.getAppointments(params);
-//    }
+    @Override
+    public List<Appointment> getAppointments(Map<String, Date> params) {
+        return this.appointmentRepository.getAppointments(params);
+    }
 
     @Override
     public Long countAppointments(Map<String, Date> params) {

@@ -45,4 +45,18 @@ public class RoleRepositoryImpl implements RoleRepository {
         return query.getResultList();
     }
 
+    @Override
+    public Role getRoleByName(String name) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Role> query = b.createQuery(Role.class);
+        Root<Role> root = query.from(Role.class);
+        
+        query.select(root).where(b.equal(root.get("name"), name));
+
+        Query q = session.createQuery(query);
+        
+        return (Role) q.getSingleResult();
+    }
+
 }

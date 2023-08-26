@@ -6,7 +6,9 @@ package com.dmp.service;
 
 import com.dmp.pojo.PrescriptionMedicine;
 import com.dmp.pojo.PrescriptionMedicineDTO;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,5 +17,5 @@ import java.util.List;
 public interface PrescriptionMedicineService {
     boolean addOrUpdate(PrescriptionMedicineDTO prescriptionMedicineDTO);
     List<PrescriptionMedicine> getPrescriptionMedicineByPrescriptionId(int id);
-    
+    List<PrescriptionMedicine> getPrescriptions(Map<String, Date> params);
 }

@@ -51,6 +51,7 @@ public class IndexController {
 
         return "index";
     }
+    
 
     @GetMapping("/change-language")
     public String changeLanguage(@RequestParam String lang, HttpServletRequest request) {

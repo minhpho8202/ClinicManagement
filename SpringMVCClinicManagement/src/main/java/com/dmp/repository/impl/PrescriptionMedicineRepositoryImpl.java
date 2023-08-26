@@ -16,7 +16,10 @@ import com.dmp.repository.PrescriptionMedicineRepository;
 import com.dmp.repository.UserRepository;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -105,6 +108,41 @@ public class PrescriptionMedicineRepositoryImpl implements PrescriptionMedicineR
         
         Query query = session.createQuery(q);
 
+        return query.getResultList();
+    }
+
+    @Override
+    public List<PrescriptionMedicine> getPrescriptions(Map<String, Date> params) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<PrescriptionMedicine> q = b.createQuery(PrescriptionMedicine.class);
+        Root<PrescriptionMedicine> root = q.from(PrescriptionMedicine.class);
+        
+        q.select(root);
+        
+        if(params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            
+//            Predicate p1 = null;
+//            Predicate p2 = null;
+            
+            Date fromDate = params.get("fromDate");
+            if(fromDate != null) {
+                predicates.add(b.greaterThanOrEqualTo(root.get("prescriptionId").get("createdDate"), fromDate));
+//                p1 = b.greaterThanOrEqualTo(root.get("createdDate"), fromDate);
+            }
+            Date toDate = params.get("toDate");
+            if(toDate != null) {
+                predicates.add(b.lessThanOrEqualTo(root.get("prescriptionId").get("createdDate"), toDate));
+//                p2 = b.lessThanOrEqualTo(root.get("createdDate"), toDate);
+            }
+            
+            q.where(predicates.toArray(new Predicate[0]));
+
+        }
+        
+        Query query = session.createQuery(q);
+        
         return query.getResultList();
     }
 

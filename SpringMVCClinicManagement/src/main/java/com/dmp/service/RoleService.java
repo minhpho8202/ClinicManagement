@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface RoleService {
     public List<Role> getRoles();
+    Role getRoleByName(String name);
 }

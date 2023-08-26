@@ -10,10 +10,19 @@
 <!DOCTYPE html>
 <section>
     <h1 class="text-center text-info mt-1"><spring:message code="content.index.title" /></h1>
-    <a href="<c:url value="/users" />" class="btn btn-primary"><spring:message code="content.index.btn_add_user" /></a>
+    <c:url value="/" var="action"/>
+    <form class="input-group mb-3" action="${action}" method="GET">
+        <input type="text" class="form-control" id="name" name="name" placeholder="Tìm kiếm theo tên...">
+        <button class="btn btn-success" type="submit"><spring:message code="content.index.search" /></button>
+    </form>
+    <a href="<c:url value="/?role=ROLE_DOCTOR" />" class="btn btn-success"><spring:message code="content.index.doctor" /></a>
+    <a href="<c:url value="/?role=ROLE_NURSE" />" class="btn btn-success"><spring:message code="content.index.nurse" /></a>
+    <a href="<c:url value="/?role=ROLE_PATIENT" />" class="btn btn-success"><spring:message code="content.index.patient" /></a>
+    <br/>
+    <a href="<c:url value="/users" />" class="btn btn-primary mt-2"><spring:message code="content.index.btn_add_user" /></a>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1 justify-content-center">
-            <li class="page-item"><a class="page-link" href="<c:url value="/" />">Tất cả</a></li>
+            <li class="page-item"><a class="page-link" href="<c:url value="/" />"><spring:message code="content.index.all" /></a></li>
                 <c:forEach begin="1" end="${counter}" var="i">
                     <c:url value="/" var="pageUrl">
                         <c:param name="page" value="${i}"></c:param>

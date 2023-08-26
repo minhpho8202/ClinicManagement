@@ -86,6 +86,9 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         // Disable crsf cho đường dẫn /rest/**
         http.csrf().ignoringAntMatchers("/api/**");
         http.authorizeRequests().antMatchers("/api/login/").permitAll()
+                .antMatchers("/api/users/").permitAll()
+                .antMatchers("/api/check-username/").permitAll()
+                .antMatchers("/api/check-email/").permitAll()
                 .antMatchers("/api/rules").access("hasRole('ROLE_DOCTOR') or hasRole('ROLE_NURSE')")
                 .antMatchers("/api/shifts").access("hasRole('ROLE_DOCTOR') or hasRole('ROLE_NURSE')")
                 .antMatchers("/api/payments").access("hasRole('ROLE_DOCTOR') or hasRole('ROLE_NURSE')")
