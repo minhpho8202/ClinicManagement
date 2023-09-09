@@ -73,7 +73,7 @@ public class ApiUserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/check-username/")
+    @GetMapping("/check-username/")
     @CrossOrigin
     public ResponseEntity<Boolean> checkUsername(@RequestParam("username") String username) {
         boolean isUsernameUnique = this.userService.isUsernameUnique(username);
@@ -81,7 +81,7 @@ public class ApiUserController {
         return new ResponseEntity<>(isUsernameUnique, HttpStatus.OK);
     }
     
-    @GetMapping(path = "/check-email/")
+    @GetMapping("/check-email/")
     @CrossOrigin
     public ResponseEntity<Boolean> checkEmail(@RequestParam("email") String email) {
         boolean isEmailUnique = this.userService.isEmailUnique(email);

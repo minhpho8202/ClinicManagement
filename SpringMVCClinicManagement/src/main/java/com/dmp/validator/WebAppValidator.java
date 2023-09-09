@@ -5,7 +5,9 @@
 package com.dmp.validator;
 
 import com.dmp.pojo.Medicine;
+import com.dmp.pojo.Shift;
 import com.dmp.pojo.User;
+import com.dmp.pojo.UserShift;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +32,22 @@ public class WebAppValidator implements Validator{
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return User.class.isAssignableFrom(clazz);
+        return User.class.isAssignableFrom(clazz)
+                || Medicine.class.isAssignableFrom(clazz)
+                || Shift.class.isAssignableFrom(clazz)
+                || UserShift.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        Set<ConstraintViolation<Object>> beans = this.beanValidator.validate(target);
-        for(ConstraintViolation obj: beans) {
-            errors.rejectValue(obj.getPropertyPath().toString(), obj.getMessageTemplate(), obj.getMessage());
-        }
         for(Validator v: this.springValidators)
             v.validate(target, errors);
+        
+        Set<ConstraintViolation<Object>> beans = this.beanValidator.validate(target);
+        for(ConstraintViolation<Object> obj: beans) {
+            errors.rejectValue(obj.getPropertyPath().toString(), obj.getMessageTemplate(), obj.getMessage());
+        }
+        
     }
 
     /**

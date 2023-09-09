@@ -10,6 +10,7 @@ import com.dmp.pojo.UserShift;
 import com.dmp.service.ShiftService;
 import com.dmp.service.UserService;
 import com.dmp.service.UserShiftService;
+import com.dmp.validator.WebAppValidator;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -18,8 +19,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +42,13 @@ public class ShiftController {
     private UserService userService;
     @Autowired
     private UserShiftService userShiftService;
+    @Autowired
+    private WebAppValidator shiftValidator;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(shiftValidator);
+    }
 
     @GetMapping("/shifts")
     public String list(Model model, @RequestParam Map<String, String> params) {
@@ -85,24 +95,25 @@ public class ShiftController {
         this.shiftService.deleteShiftById(id);
     }
 
-    @GetMapping("/shifts/{id}/employee")
-    public String addEmployeeView(Model model, @PathVariable(value = "id") int id,
-            @RequestParam Map<String, String> params) {
-        Shift shift = this.shiftService.getShiftById(id);
-        List<User> users = this.userService.getUsers(params);
-        List<UserShift> userShiftList = this.userShiftService.getUserShiftByShiftId(id);
-        if (shift != null) {
-            model.addAttribute("shift", shift);
-        }
-        if (users != null && !users.isEmpty()) {
-            model.addAttribute("user", users);
-        }
-        if (userShiftList != null && !userShiftList.isEmpty()) {
-            model.addAttribute("userShiftList", userShiftList);
-        }
-
-        model.addAttribute("userShift", new UserShift());
-
-        return "addEmployee";
-    }
+//    @GetMapping("/shifts/{id}/employee")
+//    public String addEmployeeView(Model model, @PathVariable(value = "id") int id,
+//            @RequestParam Map<String, String> params) {
+//        Shift shift = this.shiftService.getShiftById(id);
+//        params.put("shift", "add");
+//        List<User> users = this.userService.getUsers(params);
+//        List<UserShift> userShiftList = this.userShiftService.getUserShiftByShiftId(id);
+//        if (shift != null) {
+//            model.addAttribute("shift", shift);
+//        }
+//        if (users != null && !users.isEmpty()) {
+//            model.addAttribute("user", users);
+//        }
+//        if (userShiftList != null && !userShiftList.isEmpty()) {
+//            model.addAttribute("userShiftList", userShiftList);
+//        }
+//
+//        model.addAttribute("userShift", new UserShift());
+//
+//        return "addEmployee";
+//    }
 }

@@ -11,9 +11,11 @@ com\dmp\configs\JwtSecurityConfig.class
 com\dmp\service\ShiftService.class
 com\dmp\controllers\ApiUserController.class
 com\dmp\service\impl\ShiftServiceImpl.class
+com\dmp\validator\ShiftTimeValidator.class
 com\dmp\validator\UserUsernameValidator.class
 com\dmp\service\impl\RuleServiceImpl.class
 com\dmp\service\impl\PrescriptionServiceImpl.class
+com\dmp\validator\UserShiftDuplicateValidator.class
 com\dmp\repository\impl\RuleRepositoryImpl.class
 com\dmp\repository\PaymentRepository.class
 com\dmp\controllers\UserShiftController.class

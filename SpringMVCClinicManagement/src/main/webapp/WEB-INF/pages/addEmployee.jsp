@@ -54,6 +54,7 @@
                 </c:forEach>
             </form:select>
             <label for="userId" class="form-label"><spring:message code="content.shift.employee"/></label>
+            <form:errors path="userId" element="div" cssClass="alert alert-danger mt-1" />
         </div>
         <div class="form-floating mt-1">
             <button class="btn btn-success" type="submit"><spring:message code="content.index.btn_add"/></button>

@@ -16,7 +16,7 @@ import org.springframework.validation.Validator;
  *
  * @author minhp
  */
-@Component
+//@Component
 public class MedicineNameValidator implements Validator{
     
     private final MedicineService medicineService;

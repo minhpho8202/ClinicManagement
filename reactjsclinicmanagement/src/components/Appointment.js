@@ -43,7 +43,7 @@ const Appointment = () => {
 
     return (
         <Container>
-            <h1 className='text text-center text-success'>Đặt lịch khám</h1>
+            <h1 className='text text-center text-success'>Book appoiment</h1>
             <Row>
                 <Col md={4}>
                     {
@@ -55,7 +55,7 @@ const Appointment = () => {
                             <>
                                 <Form onSubmit={handleSubmit}>
                                     <Form.Group controlId="createdDate">
-                                        <Form.Label>Chọn ngày và giờ</Form.Label>
+                                        <Form.Label>Select time</Form.Label>
                                         <Form.Control
                                             type="datetime-local"
                                             name="createdDate"
@@ -64,7 +64,7 @@ const Appointment = () => {
                                         />
                                     </Form.Group>
                                     <Button variant="primary" type="submit" className='mt-1'>
-                                        Đặt lịch
+                                        Submit
                                     </Button>
                                 </Form>
                             </>

@@ -17,6 +17,9 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/"/>"><spring:message code="header.user" /></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/medicines"/>"><spring:message code="header.medicine" /></a>
                 </li>
                 <li class="nav-item">

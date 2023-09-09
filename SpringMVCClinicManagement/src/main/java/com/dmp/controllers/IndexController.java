@@ -40,6 +40,9 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(Model model, @RequestParam Map<String, String> params) {
+        if(params.isEmpty()) {
+            params.put("page", "1");
+        }
         List<User> users = this.userService.getUsers(params);
         if(users != null && !users.isEmpty())
             model.addAttribute("user", users);

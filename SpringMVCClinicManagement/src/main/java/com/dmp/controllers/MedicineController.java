@@ -9,10 +9,12 @@ import com.dmp.pojo.Unit;
 import com.dmp.service.MedicineService;
 import com.dmp.service.UnitService;
 import com.dmp.validator.MedicineNameValidator;
+import com.dmp.validator.WebAppValidator;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -41,12 +43,14 @@ public class MedicineController {
     private UnitService unitService;
     @Autowired
     private Environment env;
+//    @Autowired
+//    private MedicineNameValidator medicineNameValidator;
     @Autowired
-    private MedicineNameValidator medicineNameValidator;
+    private WebAppValidator medicineValidator;
     
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.setValidator(medicineNameValidator);
+        binder.setValidator(medicineValidator);
     }
 
     @ModelAttribute
@@ -60,6 +64,9 @@ public class MedicineController {
 
     @GetMapping("/medicines")
     public String medicine(Model model, @RequestParam Map<String, String> params) {
+        if(params.isEmpty()) {
+            params.put("page", "1");
+        }
         List<Medicine> medicines = this.medicineService.getMedicines(params);
         if (medicines != null && !medicines.isEmpty()) {
             model.addAttribute("medicine", medicines);

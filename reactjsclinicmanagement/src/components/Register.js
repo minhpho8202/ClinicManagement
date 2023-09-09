@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Alert, Button, FloatingLabel, Form } from "react-bootstrap";
 import Apis, { endpoints } from "../configs/Apis";
 import { useNavigate } from "react-router-dom";
@@ -27,8 +27,8 @@ const Register = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [usernameStatus, setUsernameStatus] = useState(0);
-    const [emailStatus, setEmailStatus] = useState(0);
+    const [usernameState, setUsernameState] = useState(false);
+    const [emailState, setEmailState] = useState(false);
 
     const register = (evt) => {
         evt.preventDefault();
@@ -56,36 +56,14 @@ const Register = () => {
                 setErr("something went wrong");
         };
 
-        const checkUsername = async () => {
-            try {
-                let e = endpoints['check-username'];
-                e = `${e}${user.username}/`;
-                const res = await Apis.get(e);
-                setUsernameStatus(res.status);
-                console.log(res.status)
-                return res.status;
-            } catch (error) {
-                console.error(error);
-                return false;
-            }
-        };
-
-        const checkEmail = async () => {
-            try {
-                let e = endpoints['check-email'];
-                e = `${e}${user.email}/`;
-                const res = await Apis.get(e);
-                setEmailStatus(res.status);
-                console.log(res.status)
-                return res.status;
-            } catch (error) {
-                console.error(error);
-                return false;
-            }
-        };
-
         if (user.password === user.confirmPassword)
-            process();
+            if (emailState === true)
+                if (usernameState === true)
+                    process();
+                else
+                    setErr("please check username");
+            else
+                setErr("please check email");
         else
             setErr("password does not match");
     };
@@ -101,6 +79,59 @@ const Register = () => {
         const newDate = new Date(event.target.value);
         setSelectedDate(newDate);
     };
+
+    const checkUsername = async (username) => {
+        try {
+            let e = endpoints['check-username'];
+            e = `${e}?username=${username}`;
+            const res = await Apis.get(e);
+            console.log(res.data)
+            console.log(username)
+            if (res.data === true) {
+                setUsernameState(true);
+                alert("valid username")
+            }
+            else {
+                alert("invalid username")
+            }
+            return res.status;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    };
+
+    const checkEmail = async (email) => {
+        try {
+            let e = endpoints['check-email'];
+            e = `${e}?email=${email}`;
+            const res = await Apis.get(e);
+            console.log(res.data);
+            console.log(email);
+            if (res.data === true) {
+                setEmailState(true);
+                alert("valid email")
+            }
+            else {
+                alert("invalid email")
+            }
+            return res.status;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    };
+
+    useEffect(() => {
+        setEmailState(false);
+    }, [user.email]);
+
+    useEffect(() => {
+        setUsernameState(false);
+    }, [user.username]);
+
+    console.log("username" + usernameState);
+    console.log("email" + emailState);
 
 
     return (
@@ -139,6 +170,7 @@ const Register = () => {
                 >
                     <Form.Control value={user.email} onChange={e => change(e, "email")} type="email" placeholder="..." required />
                 </FloatingLabel>
+                <Button variant="primary" onClick={() => checkEmail(user.email)} className="mb-3">Check Username</Button>
                 <FloatingLabel controlId="phoneNumber" label="Phone number" className="mb-3"
                 >
                     <Form.Control value={user.phoneNumber} onChange={e => change(e, "phoneNumber")} type="number" placeholder="..." required />
@@ -151,6 +183,7 @@ const Register = () => {
                 >
                     <Form.Control value={user.username} onChange={e => change(e, "username")} type="text" placeholder="..." required />
                 </FloatingLabel>
+                <Button variant="primary" onClick={() => checkUsername(user.username)} className="mb-3">Check Username</Button>
                 <FloatingLabel controlId="password" label="Password" className="mb-3">
                     <Form.Control value={user.password} onChange={e => change(e, "password")} type="password" placeholder="..." required />
                 </FloatingLabel>
@@ -166,6 +199,7 @@ const Register = () => {
                         <Button type="submit" variant="success" className="mt-2" size="lg">Register</Button>
                 }
             </Form>
+            {err === null ? "" : <Alert variant="danger" >{err}</Alert>}
         </>
     )
 }

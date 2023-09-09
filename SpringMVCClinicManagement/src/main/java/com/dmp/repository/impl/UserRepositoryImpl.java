@@ -63,6 +63,18 @@ public class UserRepositoryImpl implements UserRepository {
                 predicates.add(b.equal(root.get("roleId").get("name"), role));
             }
 
+            String shift = params.get("shift");
+            if (shift != null && !shift.isEmpty()) {
+//                predicates.add(b.equal(root.get("roleId").get("name"), "ROLE_DOCTOR"));
+//                predicates.add(b.equal(root.get("roleId").get("name"), "ROLE_NURSE"));
+                Predicate doctorPredicate = b.equal(root.get("roleId").get("name"), "ROLE_DOCTOR");
+                Predicate nursePredicate = b.equal(root.get("roleId").get("name"), "ROLE_NURSE");
+
+                Predicate orPredicate = b.or(doctorPredicate, nursePredicate);
+
+                predicates.add(orPredicate);
+            }
+
             q.where(predicates.toArray(Predicate[]::new));
         }
 
@@ -187,13 +199,13 @@ public class UserRepositoryImpl implements UserRepository {
         query.select(root).where(b.equal(root.get("username"), username));
 
         Query q = session.createQuery(query);
-        
-        try{
+
+        try {
             User user = (User) q.getSingleResult();
         } catch (NoResultException ex) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -207,13 +219,13 @@ public class UserRepositoryImpl implements UserRepository {
         query.select(root).where(b.equal(root.get("email"), email));
 
         Query q = session.createQuery(query);
-        
-        try{
+
+        try {
             User user = (User) q.getSingleResult();
         } catch (NoResultException ex) {
             return true;
         }
-        
+
         return false;
     }
 

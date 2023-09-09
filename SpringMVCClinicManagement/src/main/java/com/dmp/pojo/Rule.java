@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -39,12 +40,14 @@ public class Rule implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{rule.limit.nullErr}")
+    @Min(value = 1, message = "{rule.limit.minErr}")
     @Column(name = "appointment_limit")
     private int appointmentLimit;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{rule.fee.nullErr}")
+    @Min(value = 1, message = "{rule.fee.minErr}")
     @Column(name = "fee")
     private BigDecimal fee;
 

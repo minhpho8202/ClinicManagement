@@ -11,9 +11,13 @@ import com.dmp.fomatters.ShiftFormatter;
 import com.dmp.fomatters.UnitFormatter;
 import com.dmp.fomatters.UserFormatter;
 import com.dmp.service.MedicineService;
+import com.dmp.service.ShiftService;
 import com.dmp.service.UserService;
+import com.dmp.service.UserShiftService;
 import com.dmp.validator.ConfirmPasswordValidator;
 import com.dmp.validator.MedicineNameValidator;
+import com.dmp.validator.ShiftTimeValidator;
+import com.dmp.validator.UserShiftDuplicateValidator;
 import com.dmp.validator.UserUsernameValidator;
 import com.dmp.validator.WebAppValidator;
 import java.util.HashSet;
@@ -30,6 +34,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -67,6 +72,10 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     private UserService userService;
     @Autowired
     private MedicineService medicineService;
+    @Autowired
+    private ShiftService shiftService;
+    @Autowired
+    private UserShiftService userShiftService;
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -93,6 +102,19 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/resources/js/");
     }
     
+    @Override
+    public Validator getValidator() {
+        return validator();
+    }
+    
+    @Bean(name = "validator")
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean bean
+                = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(messageSource());
+        return bean;
+    }
+    
     @Bean
     public WebAppValidator userValidator() {
         Set<Validator> springValidators = new HashSet<>();
@@ -105,16 +127,38 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return v;
     }
     
-//    @Bean
-//    public WebAppValidator medicineValidator() {
-//        Set<Validator> springValidators = new HashSet<>();
-//        springValidators.add(new MedicineNameValidator(medicineService));
-//        
-//        WebAppValidator v = new WebAppValidator();
-//        v.setSpringValidators(springValidators);
-//        
-//        return v;
-//    }
+    @Bean
+    public WebAppValidator medicineValidator() {
+        Set<Validator> springValidators = new HashSet<>();
+        springValidators.add(new MedicineNameValidator(medicineService));
+        
+        WebAppValidator v = new WebAppValidator();
+        v.setSpringValidators(springValidators);
+        
+        return v;
+    }
+    
+    @Bean
+    public WebAppValidator shiftValidator() {
+        Set<Validator> springValidators = new HashSet<>();
+        springValidators.add(new ShiftTimeValidator(shiftService));
+        
+        WebAppValidator v = new WebAppValidator();
+        v.setSpringValidators(springValidators);
+        
+        return v;
+    }
+    
+    @Bean
+    public WebAppValidator userShiftValidator() {
+        Set<Validator> springValidators = new HashSet<>();
+        springValidators.add(new UserShiftDuplicateValidator(userShiftService));
+        
+        WebAppValidator v = new WebAppValidator();
+        v.setSpringValidators(springValidators);
+        
+        return v;
+    }
     
     @Bean
     public ResourceBundleMessageSource messageSource() {
@@ -141,35 +185,4 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return resolver;
     }
     
-    @Bean(name = "validator")
-    public LocalValidatorFactoryBean validator() {
-        LocalValidatorFactoryBean bean
-                = new LocalValidatorFactoryBean();
-        bean.setValidationMessageSource(messageSource());
-        return bean;
-    }
-    
-//    @Bean(name = "getMailSender")
-//    public JavaMailSender getMailSender() {
-//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//        
-//        mailSender.setHost("smtp.gmail.com");
-//        mailSender.setPort(587);
-//        mailSender.setUsername("minhpho8202@gmail.com");
-//        mailSender.setPassword("796120654669pho");
-//        
-//        Properties javaMailProperties = new Properties();
-//        javaMailProperties.put("mail.smtp.starttls.enable", "true");
-//        javaMailProperties.put("mail.smtp.auth", "true");
-//        javaMailProperties.put("mail.transport.protocol", "smtp");
-//        javaMailProperties.put("mail.debug", "true");
-//        
-//        mailSender.setJavaMailProperties(javaMailProperties);
-//        return mailSender;
-//    }
-
-    @Override
-    public Validator getValidator() {
-        return validator();
-    }
 }

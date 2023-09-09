@@ -43,6 +43,7 @@ C:\SpringMVCClinicManagement\src\main\java\com\dmp\controllers\ApiMedicineContro
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\service\impl\UnitServiceImpl.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\service\impl\RuleServiceImpl.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\pojo\Rule.java
+C:\SpringMVCClinicManagement\src\main\java\com\dmp\validator\UserShiftDuplicateValidator.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\service\UserShiftService.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\service\impl\AppointmentServiceImpl.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\service\RoleService.java
@@ -78,6 +79,7 @@ C:\SpringMVCClinicManagement\src\main\java\com\dmp\service\PaymentMethodService.
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\pojo\Appointment.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\fomatters\UserFormatter.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\repository\impl\AppointmentRepositoryImpl.java
+C:\SpringMVCClinicManagement\src\main\java\com\dmp\validator\ShiftTimeValidator.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\repository\impl\PrescriptionMedicineRepositoryImpl.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\controllers\RuleController.java
 C:\SpringMVCClinicManagement\src\main\java\com\dmp\pojo\Role.java

@@ -16,7 +16,7 @@ import org.springframework.validation.Validator;
  *
  * @author minhp
  */
-@Component
+//@Component
 public class ConfirmPasswordValidator implements Validator{
 
     private final UserService userService;

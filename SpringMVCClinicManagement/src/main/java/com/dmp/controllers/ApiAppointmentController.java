@@ -5,18 +5,14 @@
 package com.dmp.controllers;
 
 import com.dmp.pojo.Appointment;
-import com.dmp.pojo.User;
 import com.dmp.service.AppointmentService;
 import com.dmp.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,31 +34,14 @@ public class ApiAppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
-    @Autowired
-    private UserService userService;
-//    @Autowired
-//    @Qualifier("getMailSender")
-//    private MailSender mailSender;
 
     @PostMapping("/appointments/")
     @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     public boolean add(@RequestBody Appointment appointment) {
-//        User user = this.userService.getUserById(45);
-//        appointment.setPatientId(user);
         if (appointment.getId() != null) {
             appointment.setStatus("Confirmed");
             return this.appointmentService.addOrUpdate(appointment);
-//            if(this.appointmentService.addOrUpdate(appointment)) {
-//                SimpleMailMessage mailMessage = new SimpleMailMessage();
-//                mailMessage.setFrom("minhpho8202@gmail.com");
-//                mailMessage.setTo(appointment.getPatientId().getEmail());
-//                mailMessage.setSubject("Appointment confirmation");
-//                mailMessage.setText("Your appointment is confirm");
-//                
-//                mailSender.send(mailMessage);
-//                return true;
-//            }
         }
         appointment.setStatus("Pending confirmation");
 
@@ -104,10 +83,9 @@ public class ApiAppointmentController {
 //        if (appointment == null) {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
-
         return new ResponseEntity<>(appointment, HttpStatus.OK);
     }
-    
+
     @DeleteMapping("/appointments/{id}/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CrossOrigin

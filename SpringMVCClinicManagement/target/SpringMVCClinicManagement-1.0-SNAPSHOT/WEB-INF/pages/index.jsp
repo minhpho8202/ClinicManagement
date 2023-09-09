@@ -22,7 +22,6 @@
     <a href="<c:url value="/users" />" class="btn btn-primary mt-2"><spring:message code="content.index.btn_add_user" /></a>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1 justify-content-center">
-            <li class="page-item"><a class="page-link" href="<c:url value="/" />"><spring:message code="content.index.all" /></a></li>
                 <c:forEach begin="1" end="${counter}" var="i">
                     <c:url value="/" var="pageUrl">
                         <c:param name="page" value="${i}"></c:param>
@@ -69,7 +68,6 @@
     </table>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1 justify-content-center">
-            <li class="page-item"><a class="page-link" href="<c:url value="/" />">Tất cả</a></li>
                 <c:forEach begin="1" end="${counter}" var="i">
                     <c:url value="/" var="pageUrl">
                         <c:param name="page" value="${i}"></c:param>
