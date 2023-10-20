@@ -19,14 +19,16 @@ public class PrescriptionMedicineDTO {
     String diagnose;
     int appointmentId;
     List<Medicine> medicines;
+    private String description;
 
     public PrescriptionMedicineDTO() {
     }
 
-    public PrescriptionMedicineDTO(String symptom, String diagnose, int appointmentId, List<Medicine> medicines) {
+    public PrescriptionMedicineDTO(String symptom, String diagnose, int appointmentId, List<Medicine> medicines, String desString) {
         this.symptom = symptom;
         this.diagnose = diagnose;
         this.appointmentId = appointmentId;
         this.medicines = medicines;
+        this.description = desString;
     }
 }

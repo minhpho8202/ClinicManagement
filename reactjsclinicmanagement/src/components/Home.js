@@ -18,11 +18,6 @@ const Home = () => {
                 </Col>
             </Row>
             <Row>
-                <Col>
-                    <MySpinner />
-                </Col>
-            </Row>
-            <Row>
                 <Col md={6}>
                     <Card>
                         <Card.Img variant="top" src="https://i.pinimg.com/564x/ee/d8/19/eed8191a10a1a2beb74a3526a2d2344d.jpg" alt="Service" />
@@ -43,8 +38,7 @@ const Home = () => {
                         <Card.Body>
                             <Card.Title>Book an Appointment</Card.Title>
                             <Card.Text>
-                                Ready to book an appointment with us? Lorem ipsum dolor sit
-                                amet, consectetur adipiscing elit.
+                                Ready to book an appointment with us?
                             </Card.Text>
                             <Button variant="success" onClick={handleBooking}>Book Now</Button>
                         </Card.Body>

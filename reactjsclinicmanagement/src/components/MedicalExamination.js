@@ -15,6 +15,7 @@ const MedicalExamination = () => {
     const [selectedMedicines, setSelectedMedicines] = useState([]);
     const [symptom, setSymptom] = useState(null);
     const [diagnose, setDiagnose] = useState(null);
+    const [description, setDescription] = useState('');
     const [prescriptions, setPrescriptions] = useState([]);
     const nav = useNavigate();
     const [isTableVisible, setIsTableVisible] = useState(false);
@@ -119,11 +120,13 @@ const MedicalExamination = () => {
                         diagnose: diagnose,
                         appointmentId: appointmentId,
                         medicines: selectedMedicines,
+                        description: description,
                     });
 
                     console.log("successfully", res.data);
 
                     nav("/appointments")
+                    alert("successfully")
                 } catch (error) {
                     console.error("falied", error);
                 }
@@ -150,27 +153,27 @@ const MedicalExamination = () => {
             <h1 className="text text-center text-success">Medical Examination and Prescription</h1>
 
             <div className="container">
-                    <Button variant="info" className="mb-2" onClick={toggleTable}>Check history</Button>
-                    {isTableVisible && (
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Symptom</th>
-                                    <th>Diagnose</th>
+                <Button variant="info" className="mb-2" onClick={toggleTable}>Check history</Button>
+                {isTableVisible && (
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Symptom</th>
+                                <th>Diagnose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {prescriptions && prescriptions.map((prescription) => (
+                                <tr key={prescription.id}>
+                                    <td>{formatDate(prescription.createdDate)}</td>
+                                    <td>{prescription.symptom}</td>
+                                    <td>{prescription.diagnose}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {prescriptions && prescriptions.map((prescription) => (
-                                    <tr key={prescription.id}>
-                                        <td>{formatDate(prescription.createdDate)}</td>
-                                        <td>{prescription.symptom}</td>
-                                        <td>{prescription.diagnose}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    )}
+                            ))}
+                        </tbody>
+                    </Table>
+                )}
                 <Form onSubmit={addPrescriptionMedicine}>
                     <FloatingLabel controlId="symptom" label="Enter symptom here" className="mb-3">
                         <Form.Control type="text" placeholder="..." value={symptom} onChange={e => setSymptom(e.target.value)} />
@@ -178,6 +181,10 @@ const MedicalExamination = () => {
 
                     <FloatingLabel controlId="diagnose" label="Enter diagnose here" className="mb-3">
                         <Form.Control type="text" placeholder="..." value={diagnose} onChange={e => setDiagnose(e.target.value)} />
+                    </FloatingLabel>
+
+                    <FloatingLabel controlId="description" label="Enter description here" className="mb-3">
+                        <Form.Control type="text" placeholder="..." value={description} onChange={e => setDescription(e.target.value)} />
                     </FloatingLabel>
 
                     <FloatingLabel controlId="keyword" label="Enter medicine's name to find medicine here" className="mb-3">

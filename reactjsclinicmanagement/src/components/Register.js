@@ -170,7 +170,7 @@ const Register = () => {
                 >
                     <Form.Control value={user.email} onChange={e => change(e, "email")} type="email" placeholder="..." required />
                 </FloatingLabel>
-                <Button variant="primary" onClick={() => checkEmail(user.email)} className="mb-3">Check Username</Button>
+                <Button variant="primary" onClick={() => checkEmail(user.email)} className="mb-3">Check Email</Button>
                 <FloatingLabel controlId="phoneNumber" label="Phone number" className="mb-3"
                 >
                     <Form.Control value={user.phoneNumber} onChange={e => change(e, "phoneNumber")} type="number" placeholder="..." required />

@@ -67,6 +67,8 @@ public class Prescription implements Serializable {
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User doctorId;
+    @Column(name = "description")
+    private String description;
 
     public Prescription() {
     }
@@ -153,6 +155,20 @@ public class Prescription implements Serializable {
     @Override
     public String toString() {
         return "com.dmp.pojo.Prescription[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
     
 }

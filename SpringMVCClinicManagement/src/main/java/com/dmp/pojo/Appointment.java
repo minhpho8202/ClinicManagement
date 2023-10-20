@@ -55,6 +55,12 @@ public class Appointment implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date createdDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "appointment_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private Date appointmentTime;
     @Size(max = 50)
     @Column(name = "status")
     private String status;
@@ -141,6 +147,20 @@ public class Appointment implements Serializable {
     @Override
     public String toString() {
         return "com.dmp.pojo.Appointment[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the appointmentTime
+     */
+    public Date getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    /**
+     * @param appointmentTime the appointmentTime to set
+     */
+    public void setAppointmentTime(Date appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
     
 }

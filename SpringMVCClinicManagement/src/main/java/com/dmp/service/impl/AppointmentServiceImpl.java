@@ -7,6 +7,8 @@ package com.dmp.service.impl;
 import com.dmp.pojo.Appointment;
 import com.dmp.repository.AppointmentRepository;
 import com.dmp.service.AppointmentService;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,9 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Override
     public boolean addOrUpdate(Appointment appointment) {
+        LocalDateTime now = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(now);
+        appointment.setCreatedDate(timestamp);
         return this.appointmentRepository.addOrUpdate(appointment);
     }
 

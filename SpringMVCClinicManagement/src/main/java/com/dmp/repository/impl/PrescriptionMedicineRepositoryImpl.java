@@ -70,6 +70,7 @@ public class PrescriptionMedicineRepositoryImpl implements PrescriptionMedicineR
             prescription.setCreatedDate(timestamp);
             prescription.setSymptom(prescriptionMedicineDTO.getSymptom());
             prescription.setDiagnose(prescriptionMedicineDTO.getDiagnose());
+            prescription.setDescription(prescriptionMedicineDTO.getDescription());
             prescription.setAppointmentId(appointment);
             prescription.setDoctorId(user);
             session.save(prescription);

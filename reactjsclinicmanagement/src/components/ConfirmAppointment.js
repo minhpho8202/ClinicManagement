@@ -51,7 +51,7 @@ const ConfirmAppointment = () => {
         try {
             const confirmAppointment = await authApi().post(endpoints['appointments'], {
                 "id": a.id,
-                "createdDate": a.createdDate,
+                "appointmentTime": a.appointmentTime,
                 "patientId": a.patientId
             });
 
@@ -75,7 +75,7 @@ const ConfirmAppointment = () => {
             alert("falied");
         }
     }
-    
+
     const handleGo = (a) => {
         return nav(`/medical-examination/?appointmentId=${a.id}`);
     }
