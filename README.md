@@ -1,3 +1,7 @@
 # ClinicManagement
 
-![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/01d23383-c6c6-411d-860a-4fbf88699a30)
+Các phần mềm cần có:
+- JDK 20 (https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html)
+- Apache NetBeans IDE 18 (https://netbeans.apache.org/download/nb18/)
+- Visual Studio Code (https://code.visualstudio.com/download)
+- MySQL Workbench 8.0 CE (https://dev.mysql.com/downloads/workbench/)
