@@ -9,8 +9,6 @@ Các phần mềm cần có:
 
 Khởi động phần mềm:
 
-Phía admin:
-
 Mở MySQL Workbench 8.0 CE:
 - Tạo mới một database với tên "clinicmanagement"
 ![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/59c09db2-27bd-49c9-a657-55e2763cfadd)
@@ -44,6 +42,6 @@ Mở Visual Studio Code:
   + Chọn command prompt
 ![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/d2a1880f-efa6-4ce5-a530-273b97a1ba13)
 - Gõ lệnh "npm install" để cài đặt các thư viện.
-- Sau khi cài đặt xong các thư viện thì gõ lệnh "yarn start" để khởi động trang web. Khi thấy trang web này hiện lên thì khởi động thành công.
+- Sau khi cài đặt xong các thư viện thì gõ lệnh "yarn start" để khởi động trang web. Khi thấy trang web này hiện lên thì khởi động phía người dùng thành công.
 ![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/6a14bc26-af53-4153-a12f-685d95ce18d7)
 
