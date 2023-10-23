@@ -32,8 +32,6 @@ Mở Apache NetBeans IDE 18:
 -Khi thấy trang web này hiện lên thì quá trình khởi động phía admin thành công.
 ![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/21621419-ece9-41cb-b992-8d145b4491ef)
 
-Phía người dùng:
-
 Mở Visual Studio Code:
 
 - Mở project reactjsclinicmanagement.
