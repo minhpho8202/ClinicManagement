@@ -9,10 +9,12 @@ Các phần mềm cần có:
 
 Khởi động phần mềm:
 
+Phía admin:
+
 Mở MySQL Workbench 8.0 CE:
 - Tạo mới một database với tên "clinicmanagement"
 ![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/59c09db2-27bd-49c9-a657-55e2763cfadd)
-- Import file database
+- Import file database:
   + Server -> Data import -> Chọn Import from Self-Contained File -> Chọn đường dẫn đến file clinicmanagementdb.sql
   + Default Target Schema -> Chọn "clinicmanagement"
   + Start Import
@@ -29,4 +31,19 @@ Mở Apache NetBeans IDE 18:
 ![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/9cd401b2-5899-49af-a4d6-512d068bffe9)
 - Sau khi build xong thì bấm "Run".
 ![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/272f381d-c036-4642-941b-279de6233fab)
+-Khi thấy trang web này hiện lên thì quá trình khởi động phía admin thành công.
+![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/21621419-ece9-41cb-b992-8d145b4491ef)
+
+Phía người dùng:
+
+Mở Visual Studio Code:
+
+- Mở project reactjsclinicmanagement.
+- Mở Command Prompt:
+  + Terminal -> New Terminal
+  + Chọn command prompt
+![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/d2a1880f-efa6-4ce5-a530-273b97a1ba13)
+- Gõ lệnh "npm install" để cài đặt các thư viện.
+- Sau khi cài đặt xong các thư viện thì gõ lệnh "yarn start" để khởi động trang web. Khi thấy trang web này hiện lên thì khởi động thành công.
+![image](https://github.com/minhpho8202/ClinicManagement/assets/92845747/6a14bc26-af53-4153-a12f-685d95ce18d7)
 
